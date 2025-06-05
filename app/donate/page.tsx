@@ -5,8 +5,8 @@ export default function Donate() {
         <div className="medieval-content">
           <div className="text-center mb-12">
             <div className="medieval-crest mb-8">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-amber-800 rounded-full flex items-center justify-center mx-auto border-3 sm:border-4 border-amber-600">
-                <span className="text-amber-100 text-lg sm:text-2xl">✠</span>
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center mx-auto border-3 sm:border-4" style={{backgroundColor: 'var(--medieval-brown)', borderColor: 'var(--earthy-green)'}}>
+          <span className="text-lg sm:text-2xl" style={{color: 'var(--medieval-parchment)'}}>✠</span>
               </div>
             </div>
             <h1 className="medieval-title">Support Our Mission</h1>
@@ -16,7 +16,7 @@ export default function Donate() {
             <div className="medieval-column">
               <h2 className="medieval-subtitle">Ways to Give</h2>
               <div className="medieval-donation-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">General Support</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>General Support</h3>
                 <p className="medieval-text">
                   Your general donations help fund our overall mission of building and maintaining 
                   public shrines. These funds support materials, craftsmen, and ongoing maintenance.
@@ -27,7 +27,7 @@ export default function Donate() {
               </div>
 
               <div className="medieval-donation-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Sponsor a Shrine</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Sponsor a Shrine</h3>
                 <p className="medieval-text">
                   Sponsor the construction of a complete shrine in honor of a loved one or 
                   in thanksgiving for God's blessings in your life.
@@ -38,7 +38,7 @@ export default function Donate() {
               </div>
 
               <div className="medieval-donation-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Memorial Gifts</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Memorial Gifts</h3>
                 <p className="medieval-text">
                   Honor the memory of deceased loved ones by contributing to the creation 
                   of sacred spaces that will inspire prayer for generations.
@@ -52,7 +52,7 @@ export default function Donate() {
             <div className="medieval-column">
               <h2 className="medieval-subtitle">Other Ways to Help</h2>
               <div className="medieval-donation-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Monthly Giving</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Monthly Giving</h3>
                 <p className="medieval-text">
                   Join our community of monthly supporters who provide steady funding 
                   for our ongoing work. Even small monthly gifts make a big difference.
@@ -66,7 +66,7 @@ export default function Donate() {
               </div>
 
               <div className="medieval-donation-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">In-Kind Donations</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>In-Kind Donations</h3>
                 <p className="medieval-text">
                   We also welcome donations of materials, professional services, 
                   and skilled labor from craftsmen and artisans.
@@ -78,7 +78,7 @@ export default function Donate() {
               </div>
 
               <div className="medieval-donation-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Legacy Giving</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Legacy Giving</h3>
                 <p className="medieval-text">
                   Consider including the Sancta Terra Society in your will or estate planning 
                   to ensure our mission continues for future generations.

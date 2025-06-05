@@ -5,8 +5,8 @@ export default function Leadership() {
         <div className="medieval-content">
           <div className="text-center mb-12">
             <div className="medieval-crest mb-8">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-amber-800 rounded-full flex items-center justify-center mx-auto border-3 sm:border-4 border-amber-600">
-                <span className="text-amber-100 text-lg sm:text-2xl">✠</span>
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center mx-auto border-3 sm:border-4" style={{backgroundColor: 'var(--medieval-brown)', borderColor: 'var(--earthy-green)'}}>
+          <span className="text-lg sm:text-2xl" style={{color: 'var(--medieval-parchment)'}}>✠</span>
               </div>
             </div>
             <h1 className="medieval-title">Leadership & Governance</h1>
@@ -16,14 +16,14 @@ export default function Leadership() {
             <div className="medieval-column">
               <h2 className="medieval-subtitle">Spiritual Direction</h2>
               <div className="medieval-leader-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Chaplain</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Chaplain</h3>
                 <p className="medieval-text">
                   Our chaplain provides spiritual guidance and ensures all activities align with Catholic teaching and tradition.
                 </p>
               </div>
 
               <div className="medieval-leader-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Prior General</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Prior General</h3>
                 <p className="medieval-text">
                   The Prior General oversees the overall direction of the Society and coordinates our various initiatives across regions.
                 </p>
@@ -33,14 +33,14 @@ export default function Leadership() {
             <div className="medieval-column">
               <h2 className="medieval-subtitle">Regional Governance</h2>
               <div className="medieval-leader-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Regional Priors</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Regional Priors</h3>
                 <p className="medieval-text">
                   Each region is led by a Prior who coordinates local shrine-building efforts and maintains relationships with diocesan authorities.
                 </p>
               </div>
 
               <div className="medieval-leader-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Master Builders</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Master Builders</h3>
                 <p className="medieval-text">
                   Experienced craftsmen and architects who guide the design and construction of our sacred spaces.
                 </p>

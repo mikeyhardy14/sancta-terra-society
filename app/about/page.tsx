@@ -5,8 +5,8 @@ export default function About() {
         <div className="medieval-content">
           <div className="text-center mb-12">
             <div className="medieval-crest mb-8">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-amber-800 rounded-full flex items-center justify-center mx-auto border-3 sm:border-4 border-amber-600">
-                <span className="text-amber-100 text-lg sm:text-2xl">✠</span>
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center mx-auto border-3 sm:border-4" style={{backgroundColor: 'var(--medieval-brown)', borderColor: 'var(--earthy-green)'}}>
+          <span className="text-lg sm:text-2xl" style={{color: 'var(--medieval-parchment)'}}>✠</span>
               </div>
             </div>
             <h1 className="medieval-title">About Our Society</h1>

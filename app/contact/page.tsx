@@ -5,8 +5,8 @@ export default function Contact() {
         <div className="medieval-content">
           <div className="text-center mb-12">
             <div className="medieval-crest mb-8">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-amber-800 rounded-full flex items-center justify-center mx-auto border-3 sm:border-4 border-amber-600">
-                <span className="text-amber-100 text-lg sm:text-2xl">✠</span>
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center mx-auto border-3 sm:border-4" style={{backgroundColor: 'var(--medieval-brown)', borderColor: 'var(--earthy-green)'}}>
+          <span className="text-lg sm:text-2xl" style={{color: 'var(--medieval-parchment)'}}>✠</span>
               </div>
             </div>
             <h1 className="medieval-title">Contact Us</h1>
@@ -16,54 +16,54 @@ export default function Contact() {
             <div className="medieval-column">
               <h2 className="medieval-subtitle">Correspondence</h2>
               <div className="medieval-contact-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">General Inquiries</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>General Inquiries</h3>
                 <p className="medieval-text">
                   For general questions about the Society, our mission, or how to get involved:
                 </p>
-                <p className="text-amber-800 font-bold">info@sanctaterrasociety.org</p>
+                <p className="font-bold" style={{color: 'var(--earthy-green)'}}>info@sanctaterrasociety.org</p>
               </div>
 
               <div className="medieval-contact-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Shrine Projects</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Shrine Projects</h3>
                 <p className="medieval-text">
                   For inquiries about building or maintaining shrines in your area:
                 </p>
-                <p className="text-amber-800 font-bold">projects@sanctaterrasociety.org</p>
+                <p className="font-bold" style={{color: 'var(--earthy-green)'}}>projects@sanctaterrasociety.org</p>
               </div>
 
               <div className="medieval-contact-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Spiritual Guidance</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Spiritual Guidance</h3>
                 <p className="medieval-text">
                   For spiritual direction and guidance regarding our mission:
                 </p>
-                <p className="text-amber-800 font-bold">chaplain@sanctaterrasociety.org</p>
+                <p className="font-bold" style={{color: 'var(--earthy-green)'}}>chaplain@sanctaterrasociety.org</p>
               </div>
             </div>
 
             <div className="medieval-column">
               <h2 className="medieval-subtitle">Regional Offices</h2>
               <div className="medieval-contact-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">North America</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>North America</h3>
                 <p className="medieval-text">
                   Serving the United States, Canada, and Mexico
                 </p>
-                <p className="text-amber-800 font-bold">northamerica@sanctaterrasociety.org</p>
+                <p className="font-bold" style={{color: 'var(--earthy-green)'}}>northamerica@sanctaterrasociety.org</p>
               </div>
 
               <div className="medieval-contact-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Europe</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Europe</h3>
                 <p className="medieval-text">
                   Serving European nations and the British Isles
                 </p>
-                <p className="text-amber-800 font-bold">europe@sanctaterrasociety.org</p>
+                <p className="font-bold" style={{color: 'var(--earthy-green)'}}>europe@sanctaterrasociety.org</p>
               </div>
 
               <div className="medieval-contact-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Other Regions</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Other Regions</h3>
                 <p className="medieval-text">
                   For all other regions worldwide
                 </p>
-                <p className="text-amber-800 font-bold">international@sanctaterrasociety.org</p>
+                <p className="font-bold" style={{color: 'var(--earthy-green)'}}>international@sanctaterrasociety.org</p>
               </div>
             </div>
           </div>

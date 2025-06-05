@@ -5,8 +5,8 @@ export default function Projects() {
         <div className="medieval-content">
           <div className="text-center mb-12">
             <div className="medieval-crest mb-8">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-amber-800 rounded-full flex items-center justify-center mx-auto border-3 sm:border-4 border-amber-600">
-                <span className="text-amber-100 text-lg sm:text-2xl">✠</span>
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center mx-auto border-3 sm:border-4" style={{backgroundColor: 'var(--medieval-brown)', borderColor: 'var(--earthy-green)'}}>
+          <span className="text-lg sm:text-2xl" style={{color: 'var(--medieval-parchment)'}}>✠</span>
               </div>
             </div>
             <h1 className="medieval-title">Sacred Projects</h1>
@@ -16,7 +16,7 @@ export default function Projects() {
             <div className="medieval-column">
               <h2 className="medieval-subtitle">Current Undertakings</h2>
               <div className="medieval-project-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">The Urban Crucifixes Initiative</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>The Urban Crucifixes Initiative</h3>
                 <p className="medieval-text">
                   Installing beautiful crucifixes in public squares and parks across major cities, 
                   bringing the presence of Christ into the heart of urban life.
@@ -25,7 +25,7 @@ export default function Projects() {
               </div>
 
               <div className="medieval-project-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Marian Wayside Shrines</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Marian Wayside Shrines</h3>
                 <p className="medieval-text">
                   Creating small but beautiful shrines to Our Lady along pilgrimage routes 
                   and in places of natural beauty.
@@ -34,7 +34,7 @@ export default function Projects() {
               </div>
 
               <div className="medieval-project-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Saints of the Nations</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Saints of the Nations</h3>
                 <p className="medieval-text">
                   Establishing shrines dedicated to patron saints of various nations 
                   in immigrant communities and cultural centers.
@@ -46,7 +46,7 @@ export default function Projects() {
             <div className="medieval-column">
               <h2 className="medieval-subtitle">Completed Works</h2>
               <div className="medieval-project-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">St. Michael's Garden Shrine</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>St. Michael's Garden Shrine</h3>
                 <p className="medieval-text">
                   A magnificent shrine to St. Michael the Archangel in the heart of a public garden, 
                   featuring traditional stonework and sacred imagery.
@@ -55,7 +55,7 @@ export default function Projects() {
               </div>
 
               <div className="medieval-project-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Sacred Heart Memorial</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Sacred Heart Memorial</h3>
                 <p className="medieval-text">
                   A public monument to the Sacred Heart of Jesus, erected in memory of fallen soldiers, 
                   combining patriotic and religious devotion.
@@ -65,7 +65,7 @@ export default function Projects() {
 
               <h2 className="medieval-subtitle mt-8">Future Visions</h2>
               <div className="medieval-project-card">
-                <h3 className="text-amber-800 font-bold text-lg mb-2">Cathedral Square Project</h3>
+                <h3 className="font-bold text-lg mb-2" style={{color: 'var(--earthy-green)'}}>Cathedral Square Project</h3>
                 <p className="medieval-text">
                   A grand vision for transforming public spaces near cathedrals into 
                   places of prayer and contemplation.

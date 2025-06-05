@@ -20,8 +20,8 @@ export default function Navigation() {
       <nav className="medieval-nav">
         <div className="medieval-nav-content">
           <Link href="/" className="medieval-nav-brand">
-            <div className="w-10 h-10 bg-amber-700 rounded-full flex items-center justify-center border-2 border-yellow-500">
-              <span className="text-yellow-200 text-lg font-bold">✠</span>
+            <div className="w-10 h-10 rounded-full flex items-center justify-center border-2" style={{backgroundColor: 'var(--medieval-brown)', borderColor: 'var(--earthy-green)'}}>
+              <span className="text-lg font-bold" style={{color: 'var(--medieval-parchment)'}}>✠</span>
             </div>
             <span>Sancta Terra Society</span>
           </Link>
@@ -54,8 +54,8 @@ export default function Navigation() {
       <div className={`medieval-mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
         <div className="medieval-mobile-menu-header">
           <Link href="/" className="medieval-mobile-menu-brand" onClick={closeMobileMenu}>
-            <div className="w-10 h-10 bg-amber-700 rounded-full flex items-center justify-center border-2 border-yellow-500">
-              <span className="text-yellow-200 text-lg font-bold">✠</span>
+            <div className="w-10 h-10 rounded-full flex items-center justify-center border-2" style={{backgroundColor: 'var(--medieval-brown)', borderColor: 'var(--earthy-green)'}}>
+              <span className="text-lg font-bold" style={{color: 'var(--medieval-parchment)'}}>✠</span>
             </div>
             <span>Sancta Terra Society</span>
           </Link>
