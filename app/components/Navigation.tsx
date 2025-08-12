@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function Navigation() {
@@ -20,10 +21,16 @@ export default function Navigation() {
       <nav className="medieval-nav">
         <div className="medieval-nav-content">
           <Link href="/" className="medieval-nav-brand">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center border-2" style={{backgroundColor: 'var(--medieval-brown)', borderColor: 'var(--earthy-green)'}}>
-              <span className="text-lg font-bold" style={{color: 'var(--medieval-parchment)'}}>✠</span>
+            <div className="h-12 w-auto">
+              <Image
+                src="/SST_Crest_SST_Small_Lockup.png"
+                alt="Sancta Terra Society"
+                width={180}
+                height={48}
+                className="h-full w-auto object-contain"
+                priority
+              />
             </div>
-            <span>Sancta Terra Society</span>
           </Link>
           
           <div className="medieval-nav-links">
@@ -54,10 +61,16 @@ export default function Navigation() {
       <div className={`medieval-mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
         <div className="medieval-mobile-menu-header">
           <Link href="/" className="medieval-mobile-menu-brand" onClick={closeMobileMenu}>
-            <div className="w-10 h-10 rounded-full flex items-center justify-center border-2" style={{backgroundColor: 'var(--medieval-brown)', borderColor: 'var(--earthy-green)'}}>
-              <span className="text-lg font-bold" style={{color: 'var(--medieval-parchment)'}}>✠</span>
+            <div className="h-10 w-auto">
+              <Image
+                src="/SST_Crest_SST_Small_Lockup.png"
+                alt="Sancta Terra Society"
+                width={150}
+                height={40}
+                className="h-full w-auto object-contain"
+                priority
+              />
             </div>
-            <span>Sancta Terra Society</span>
           </Link>
           
           <button 
