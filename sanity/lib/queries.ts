@@ -74,6 +74,14 @@ export const siteSettingsQuery = groq`
   }
 `
 
+export const aboutPageQuery = groq`
+  *[_type == "aboutPage"][0] {
+    pageTitle,
+    foundationSection,
+    heritageSection
+  }
+`
+
 export const footerQuery = groq`
   *[_type == "footer"][0] {
     tagline,

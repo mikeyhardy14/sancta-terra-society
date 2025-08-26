@@ -1,6 +1,7 @@
 import { client } from '../client'
 import { 
   homePageQuery, 
+  aboutPageQuery,
   leadershipQuery, 
   projectsQuery, 
   projectBySlugQuery, 
@@ -10,6 +11,10 @@ import {
 
 export async function getHomePage() {
   return await client.fetch(homePageQuery)
+}
+
+export async function getAboutPage() {
+  return await client.fetch(aboutPageQuery)
 }
 
 export async function getLeadership() {
