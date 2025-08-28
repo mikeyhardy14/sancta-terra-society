@@ -72,8 +72,12 @@ export default function Leadership() {
 
   const leaders = leadership && leadership.length > 0 ? leadership : fallbackLeadership;
 
-  const toggleExpanded = (memberId: string) => {
-    setExpandedMember(expandedMember === memberId ? null : memberId);
+  const openModal = (memberId: string) => {
+    setExpandedMember(memberId);
+  };
+
+  const closeModal = () => {
+    setExpandedMember(null);
   };
 
   if (loading) {
@@ -105,14 +109,14 @@ export default function Leadership() {
             <div className="w-32 h-1 mx-auto mt-4" style={{backgroundColor: 'var(--earthy-green)'}}></div>
           </div>
 
-          <div className="medieval-text-layout">
-            {/* Responsive grid that centers items and prevents left-stacking */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center max-w-6xl mx-auto">
+          {/* Single column layout with responsive grid */}
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center">
               {leaders.map((leader) => (
                 <div 
                   key={leader._id} 
                   className="w-full max-w-sm medieval-leader-card transition-all duration-300 hover:shadow-lg cursor-pointer"
-                  onClick={() => toggleExpanded(leader._id)}
+                  onClick={() => openModal(leader._id)}
                 >
                   {/* Profile Image */}
                   <div className="mb-6">
@@ -142,44 +146,70 @@ export default function Leadership() {
                   {/* Click indicator */}
                   <div className="text-center mb-4">
                     <span className="text-xs uppercase tracking-wider opacity-60 transition-opacity duration-300 hover:opacity-100" style={{color: 'var(--medieval-brown)'}}>
-                      Click to {expandedMember === leader._id ? 'collapse' : 'read biography'}
+                      Click to read biography
                     </span>
-                  </div>
-
-                  {/* Expandable Biography */}
-                  <div className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                    expandedMember === leader._id ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                  }`}>
-                    {leader.bio && (
-                      <div className="pt-4 border-t-2 mt-4" style={{borderColor: 'var(--earthy-green)'}}>
-                        <p className="medieval-text text-left leading-relaxed">
-                          {leader.bio}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Expand/Collapse Icon */}
-                  <div className="text-center mt-4">
-                    <div className={`transition-transform duration-300 ${
-                      expandedMember === leader._id ? 'rotate-180' : 'rotate-0'
-                    }`}>
-                      <svg 
-                        width="20" 
-                        height="20" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        className="mx-auto opacity-60"
-                        style={{stroke: 'var(--earthy-green)'}}
-                      >
-                        <path d="M6 9l6 6 6-6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+
+          {/* Modal Popup */}
+          {expandedMember && (
+            <div 
+              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+              onClick={closeModal}
+            >
+              <div 
+                className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+                style={{backgroundColor: 'var(--medieval-parchment)'}}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {(() => {
+                  const selectedLeader = leaders.find(l => l._id === expandedMember);
+                  if (!selectedLeader) return null;
+                  
+                  return (
+                    <div className="p-8">
+                      {/* Close button */}
+                      <button
+                        onClick={closeModal}
+                        className="float-right text-2xl font-bold hover:opacity-70 transition-opacity"
+                        style={{color: 'var(--medieval-brown)'}}
+                      >
+                        ×
+                      </button>
+                      
+                      {/* Modal content */}
+                      <div className="text-center mb-8">
+                        {selectedLeader.image && (
+                          <div className="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 shadow-lg" style={{borderColor: 'var(--earthy-green)'}}>
+                            <Image
+                              src={urlFor(selectedLeader.image).width(300).height(300).url()}
+                              alt={selectedLeader.name}
+                              width={160}
+                              height={160}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        )}
+                        <h2 className="font-bold text-3xl mb-2" style={{color: 'var(--earthy-green)'}}>{selectedLeader.name}</h2>
+                        <h3 className="font-semibold text-lg uppercase tracking-wide mb-6" style={{color: 'var(--medieval-brown)'}}>{selectedLeader.title}</h3>
+                      </div>
+                      
+                      {selectedLeader.bio && (
+                        <div className="prose max-w-none">
+                          <p className="medieval-text leading-relaxed text-lg" style={{color: 'var(--medieval-brown)'}}>
+                            {selectedLeader.bio}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
+              </div>
+            </div>
+          )}
 
           <div className="text-center mt-16">
             <div className="medieval-notice">
