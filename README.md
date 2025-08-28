@@ -51,12 +51,23 @@ Sancta-Terra-Society/
    npm install
    ```
 
-3. Start the development server:
+3. Set up environment variables:
+   ```bash
+   # Copy and configure your environment variables
+   cp .env.example .env.local
+   
+   # Add your Sanity project details:
+   NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id_here
+   NEXT_PUBLIC_SANITY_DATASET=production
+   SANITY_WEBHOOK_SECRET=your_webhook_secret_here
+   ```
+
+4. Start the development server:
    ```bash
    npm run dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ### Available Scripts
 
@@ -111,6 +122,53 @@ npm run lint         # Run ESLint
 - Gradient backgrounds
 - Custom scrollbar styling
 - Enhanced focus states for accessibility
+
+## 🔄 Instant Content Updates (Webhooks)
+
+This site supports instant content updates from Sanity CMS using webhooks. When you publish content in Sanity Studio, the site automatically revalidates and shows your changes immediately.
+
+### Setting Up Webhooks
+
+1. **Generate a webhook secret**:
+   ```bash
+   # Generate a secure random string
+   openssl rand -hex 32
+   ```
+
+2. **Add the secret to your environment variables**:
+   ```bash
+   # In your .env.local file
+   SANITY_WEBHOOK_SECRET=your_generated_secret_here
+   ```
+
+3. **Configure the webhook in Sanity Studio**:
+   - Go to your Sanity project dashboard: `https://sanity.io/manage`
+   - Navigate to your project → API → Webhooks
+   - Click "Create webhook"
+   - Set the URL to: `https://your-domain.com/api/revalidate`
+   - Set the dataset to: `production` (or your dataset name)
+   - Add the secret you generated above
+   - Enable triggers for all document types you want to auto-update
+
+4. **Deploy your changes** with the webhook secret environment variable
+
+### How It Works
+
+- When you publish/update content in Sanity Studio
+- Sanity sends a webhook to your `/api/revalidate` endpoint
+- The endpoint verifies the webhook signature for security
+- It triggers Next.js revalidation for the appropriate pages
+- Your site instantly shows the updated content
+
+### Supported Document Types
+
+The webhook automatically revalidates the correct pages based on document type:
+- `homePage` → Homepage (`/`)
+- `aboutPage` → About page (`/about`)
+- `leadership` → Leadership page (`/leadership`)
+- `project` → Projects pages (`/projects`)
+- `footer` → All pages (footer appears everywhere)
+- `siteSettings` → All pages
 
 ## 🔧 Customization
 

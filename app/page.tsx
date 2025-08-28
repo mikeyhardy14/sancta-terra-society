@@ -40,8 +40,7 @@ interface HomePageData {
   };
 }
 
-// Revalidate the page every 60 seconds
-export const revalidate = 60;
+// No need for time-based revalidation - using webhooks for instant updates
 
 export default async function Home() {
   const data: HomePageData | null = await getHomePage();
