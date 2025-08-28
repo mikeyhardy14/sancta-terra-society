@@ -41,12 +41,37 @@ export const projectsQuery = groq`
     title,
     slug,
     description,
-    featuredImage,
+    featuredImage {
+      asset -> {
+        _id,
+        url
+      },
+      alt
+    },
     location,
     startDate,
     completionDate,
     status,
-    featured
+    featured,
+    content,
+    statusHistory[] {
+      status,
+      date,
+      notes
+    },
+    updates[] {
+      title,
+      excerpt,
+      date,
+      media[] {
+        asset -> {
+          _id,
+          url
+        },
+        alt
+      },
+      content
+    }
   }
 `
 

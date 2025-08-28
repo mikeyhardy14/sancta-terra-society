@@ -72,14 +72,6 @@ export default function Navigation() {
               />
             </div>
           </Link>
-          
-          <button 
-            className="medieval-close-button"
-            onClick={closeMobileMenu}
-            aria-label="Close mobile menu"
-          >
-            ✕
-          </button>
         </div>
 
         <div className="medieval-mobile-menu-content">

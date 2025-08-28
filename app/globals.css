@@ -318,7 +318,7 @@ body {
 .medieval-floating-hamburger {
   position: fixed;
   top: 1rem;
-  right: 1rem;
+  left: 1rem;
   z-index: 100;
   background: rgba(58, 45, 34, 0.95);
   border: 2px solid var(--earthy-green);

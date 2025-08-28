@@ -88,6 +88,136 @@ export const project = defineType({
       description: 'Show this project prominently on the projects page',
       initialValue: false,
     }),
+    defineField({
+      name: 'statusHistory',
+      title: 'Status History',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'status',
+              title: 'Status',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Planning', value: 'planning' },
+                  { title: 'In Progress', value: 'in-progress' },
+                  { title: 'Completed', value: 'completed' },
+                  { title: 'On Hold', value: 'on-hold' },
+                ],
+              },
+            }),
+            defineField({
+              name: 'date',
+              title: 'Date Changed',
+              type: 'datetime',
+            }),
+            defineField({
+              name: 'notes',
+              title: 'Notes',
+              type: 'text',
+              rows: 2,
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'status',
+              subtitle: 'date',
+            },
+            prepare(selection) {
+              const { title, subtitle } = selection;
+              return {
+                title: title ? title.charAt(0).toUpperCase() + title.slice(1) : 'Status Change',
+                subtitle: subtitle ? new Date(subtitle).toLocaleDateString() : '',
+              };
+            },
+          },
+        },
+      ],
+    }),
+    defineField({
+      name: 'updates',
+      title: 'Project Updates',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Update Title',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'excerpt',
+              title: 'Excerpt',
+              type: 'text',
+              rows: 3,
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'date',
+              title: 'Update Date',
+              type: 'datetime',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'media',
+              title: 'Photos & Videos',
+              type: 'array',
+              of: [
+                {
+                  type: 'image',
+                  options: {
+                    hotspot: true,
+                  },
+                },
+                {
+                  type: 'file',
+                  options: {
+                    accept: 'video/*',
+                  },
+                },
+              ],
+            }),
+            defineField({
+              name: 'content',
+              title: 'Full Update Content',
+              type: 'array',
+              of: [
+                {
+                  type: 'block',
+                },
+                {
+                  type: 'image',
+                  options: {
+                    hotspot: true,
+                  },
+                },
+              ],
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'title',
+              subtitle: 'date',
+              media: 'media.0',
+            },
+            prepare(selection) {
+              const { title, subtitle, media } = selection;
+              return {
+                title: title || 'Project Update',
+                subtitle: subtitle ? new Date(subtitle).toLocaleDateString() : '',
+                media: media,
+              };
+            },
+          },
+        },
+      ],
+    }),
   ],
   orderings: [
     {
