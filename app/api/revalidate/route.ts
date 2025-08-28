@@ -3,25 +3,34 @@ import { NextRequest, NextResponse } from 'next/server'
 import crypto from 'crypto'
 
 export async function POST(request: NextRequest) {
+  console.log('🔥 WEBHOOK RECEIVED at:', new Date().toISOString())
+  console.log('🔍 Headers:', Object.fromEntries(request.headers.entries()))
+  
   try {
     // Get the webhook secret from environment variables
     const secret = process.env.SANITY_WEBHOOK_SECRET
     
+    console.log('🔑 Webhook secret configured:', !!secret)
+    
     if (!secret) {
-      console.error('SANITY_WEBHOOK_SECRET is not configured')
+      console.error('❌ SANITY_WEBHOOK_SECRET is not configured')
       return NextResponse.json({ error: 'Webhook secret not configured' }, { status: 500 })
     }
 
     // Get the signature from the header
     const signature = request.headers.get('sanity-webhook-signature')
     
+    console.log('📝 Signature received:', signature)
+    
     if (!signature) {
-      console.error('No signature found in webhook request')
+      console.error('❌ No signature found in webhook request')
       return NextResponse.json({ error: 'No signature' }, { status: 401 })
     }
 
     // Get the raw body
     const body = await request.text()
+    console.log('📄 Body length:', body.length)
+    console.log('📄 Body preview:', body.substring(0, 200) + '...')
     
     // Verify the signature
     const expectedSignature = crypto
@@ -29,15 +38,20 @@ export async function POST(request: NextRequest) {
       .update(body)
       .digest('hex')
     
+    console.log('🔐 Expected signature:', expectedSignature)
+    console.log('🔐 Received signature:', signature)
+    
     if (signature !== expectedSignature) {
-      console.error('Invalid webhook signature')
+      console.error('❌ Invalid webhook signature')
+      console.error('Expected:', expectedSignature)
+      console.error('Received:', signature)
       return NextResponse.json({ error: 'Invalid signature' }, { status: 401 })
     }
 
     // Parse the webhook payload
     const payload = JSON.parse(body)
     
-    console.log('Webhook received:', {
+    console.log('✅ Webhook payload:', {
       type: payload._type,
       id: payload._id,
       rev: payload._rev
@@ -47,35 +61,35 @@ export async function POST(request: NextRequest) {
     switch (payload._type) {
       case 'homePage':
         revalidatePath('/')
-        console.log('Revalidated homepage')
+        console.log('🏠 Revalidated homepage')
         break
       case 'aboutPage':
         revalidatePath('/about')
-        console.log('Revalidated about page')
+        console.log('📖 Revalidated about page')
         break
       case 'leadership':
         revalidatePath('/leadership')
-        console.log('Revalidated leadership page')
+        console.log('👥 Revalidated leadership page')
         break
       case 'project':
         revalidatePath('/projects')
         revalidatePath(`/projects/${payload.slug?.current}`)
-        console.log('Revalidated projects')
+        console.log('🏗️ Revalidated projects')
         break
       case 'footer':
         // Footer appears on all pages, so revalidate everything
         revalidatePath('/', 'layout')
-        console.log('Revalidated all pages (footer change)')
+        console.log('🦶 Revalidated all pages (footer change)')
         break
       case 'siteSettings':
         // Site settings might affect all pages
         revalidatePath('/', 'layout')
-        console.log('Revalidated all pages (site settings change)')
+        console.log('⚙️ Revalidated all pages (site settings change)')
         break
       default:
         // For any other document type, revalidate the homepage
         revalidatePath('/')
-        console.log('Revalidated homepage (unknown document type)')
+        console.log('🔄 Revalidated homepage (unknown document type:', payload._type, ')')
     }
 
     return NextResponse.json({ 
