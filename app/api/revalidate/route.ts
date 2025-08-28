@@ -51,14 +51,14 @@ export async function POST(request: NextRequest) {
     // Create the signing payload: timestamp + body (Sanity's format)
     const signingPayload = timestamp + body
     
-    // Verify the signature
+    // Verify the signature (Sanity uses base64, not hex)
     const expectedSignature = crypto
       .createHmac('sha256', secret)
       .update(signingPayload)
-      .digest('hex')
+      .digest('base64')
     
-    console.log('🔐 Expected signature:', expectedSignature)
-    console.log('🔐 Received signature:', signature)
+    console.log('🔐 Expected signature (base64):', expectedSignature)
+    console.log('🔐 Received signature (base64):', signature)
     
     if (signature !== expectedSignature) {
       console.error('❌ Invalid webhook signature')
