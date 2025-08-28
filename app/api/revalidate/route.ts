@@ -18,24 +18,43 @@ export async function POST(request: NextRequest) {
     }
 
     // Get the signature from the header
-    const signature = request.headers.get('sanity-webhook-signature')
+    const signatureHeader = request.headers.get('sanity-webhook-signature')
     
-    console.log('📝 Signature received:', signature)
+    console.log('📝 Signature header received:', signatureHeader)
     
-    if (!signature) {
+    if (!signatureHeader) {
       console.error('❌ No signature found in webhook request')
       return NextResponse.json({ error: 'No signature' }, { status: 401 })
     }
+
+    // Parse Sanity's signature format: "t=timestamp,v1=signature"
+    const signatureParts = signatureHeader.split(',')
+    const timestampPart = signatureParts.find(part => part.startsWith('t='))
+    const signaturePart = signatureParts.find(part => part.startsWith('v1='))
+    
+    if (!timestampPart || !signaturePart) {
+      console.error('❌ Invalid signature format')
+      return NextResponse.json({ error: 'Invalid signature format' }, { status: 401 })
+    }
+    
+    const timestamp = timestampPart.split('=')[1]
+    const signature = signaturePart.split('=')[1]
+    
+    console.log('🕐 Timestamp:', timestamp)
+    console.log('📝 Extracted signature:', signature)
 
     // Get the raw body
     const body = await request.text()
     console.log('📄 Body length:', body.length)
     console.log('📄 Body preview:', body.substring(0, 200) + '...')
     
+    // Create the signing payload: timestamp + body (Sanity's format)
+    const signingPayload = timestamp + body
+    
     // Verify the signature
     const expectedSignature = crypto
       .createHmac('sha256', secret)
-      .update(body)
+      .update(signingPayload)
       .digest('hex')
     
     console.log('🔐 Expected signature:', expectedSignature)
