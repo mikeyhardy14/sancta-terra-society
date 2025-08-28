@@ -40,6 +40,9 @@ interface HomePageData {
   };
 }
 
+// Revalidate the page every 60 seconds
+export const revalidate = 60;
+
 export default async function Home() {
   const data: HomePageData | null = await getHomePage();
 
@@ -141,9 +144,11 @@ export default async function Home() {
                 {data.vocationSection?.title && (
                   <div className="medieval-notice mt-6">
                     <h3 className="font-bold text-lg mb-3" style={{color: 'var(--earthy-green)'}}>{data.vocationSection.title}</h3>
-                    {data.vocationSection.quote && data.vocationSection.quoteReference && (
+                    {(data.vocationSection.quote || data.vocationSection.quoteReference) && (
                       <p className="medieval-text italic">
-                        "{data.vocationSection.quote}" - {data.vocationSection.quoteReference}
+                        {data.vocationSection.quote && `"${data.vocationSection.quote}"`}
+                        {data.vocationSection.quote && data.vocationSection.quoteReference && " - "}
+                        {data.vocationSection.quoteReference}
                       </p>
                     )}
                     {data.vocationSection.content && (
