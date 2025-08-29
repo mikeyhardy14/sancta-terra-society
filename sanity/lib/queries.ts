@@ -119,3 +119,27 @@ export const footerQuery = groq`
     bibleQuote
   }
 `
+
+export const donatePageQuery = groq`
+  *[_type == "donatePage"][0] {
+    pageTitle,
+    donationOptions[] {
+      textAbove,
+      title,
+      description,
+      buttonText,
+      buttonUrl,
+      openInNewTab,
+      textBelow
+    },
+    taxInformation {
+      title,
+      description,
+      taxId,
+      bibleQuote {
+        text,
+        reference
+      }
+    }
+  }
+`

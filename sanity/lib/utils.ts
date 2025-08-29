@@ -2,6 +2,7 @@ import { client } from '../client'
 import { 
   homePageQuery, 
   aboutPageQuery,
+  donatePageQuery,
   leadershipQuery, 
   projectsQuery, 
   projectBySlugQuery, 
@@ -15,6 +16,10 @@ export async function getHomePage() {
 
 export async function getAboutPage() {
   return await client.fetch(aboutPageQuery)
+}
+
+export async function getDonatePage() {
+  return await client.fetch(donatePageQuery)
 }
 
 export async function getLeadership() {
