@@ -29,6 +29,14 @@ body {
   color: var(--foreground);
   font-family: 'Alverata', "Times New Roman", serif;
   line-height: 1.6;
+  padding-top: 0; /* Default for desktop */
+}
+
+/* Add padding for mobile to account for fixed navigation */
+@media (max-width: 767px) {
+  body {
+    padding-top: 56px; /* Height of medieval-mobile-nav */
+  }
 }
 
 /* Ensure footer overrides body background */
@@ -818,5 +826,212 @@ button, a, input, select, textarea {
   
   .medieval-footer-mission {
     font-size: 1rem;
+  }
+}
+
+/* Medieval-style Mobile Navigation */
+.medieval-mobile-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: rgba(58, 45, 34, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 3px solid var(--earthy-green);
+  padding: 0 16px;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .medieval-mobile-nav {
+    display: none; /* Hide on desktop */
+  }
+}
+
+.medieval-hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: 2px solid var(--earthy-green);
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.medieval-hamburger:hover {
+  background: rgba(122, 132, 113, 0.2);
+}
+
+.medieval-hamburger-line {
+  width: 20px;
+  height: 2px;
+  background: var(--earthy-green);
+  transition: all 0.3s ease;
+  position: absolute;
+  border-radius: 1px;
+}
+
+.medieval-hamburger-line:nth-child(1) {
+  transform: translateY(-5px);
+}
+
+.medieval-hamburger-line:nth-child(2) {
+  transform: translateY(0);
+}
+
+.medieval-hamburger-line:nth-child(3) {
+  transform: translateY(5px);
+}
+
+.medieval-hamburger.open .medieval-hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translateY(0);
+}
+
+.medieval-hamburger.open .medieval-hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.medieval-hamburger.open .medieval-hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translateY(0);
+}
+
+.medieval-mobile-logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Medieval-style Full-screen Mobile Menu */
+.medieval-mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(58, 45, 34, 0);
+  backdrop-filter: blur(0px);
+  z-index: 90;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+}
+
+.medieval-mobile-menu-overlay.open {
+  background: rgba(58, 45, 34, 0.8);
+  backdrop-filter: blur(20px);
+  opacity: 1;
+  visibility: visible;
+}
+
+.medieval-mobile-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(58, 45, 34, 0.98);
+  backdrop-filter: blur(20px);
+  transform: translateY(-100%);
+  transition: transform 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.medieval-mobile-menu-overlay.open .medieval-mobile-menu {
+  transform: translateY(0);
+}
+
+.medieval-mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 56px;
+  padding: 0 16px;
+  border-bottom: 2px solid var(--earthy-green);
+}
+
+.medieval-close-button {
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: 2px solid var(--earthy-green);
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--earthy-green);
+  transition: all 0.3s ease;
+}
+
+.medieval-close-button:hover {
+  background: var(--earthy-green);
+  color: var(--medieval-parchment);
+}
+
+.medieval-mobile-menu-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem 2rem 1rem;
+  gap: 1rem;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 2rem;
+}
+
+.medieval-mobile-menu-link {
+  display: block;
+  color: var(--medieval-parchment);
+  text-decoration: none;
+  font-family: "Times New Roman", serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  padding: 1rem 2rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  text-align: center;
+  min-width: 200px;
+}
+
+.medieval-mobile-menu-link:hover {
+  background: rgba(122, 132, 113, 0.2);
+  color: var(--earthy-green);
+  border-color: var(--earthy-green);
+}
+
+.medieval-mobile-menu-link-accent {
+  color: var(--earthy-green);
+  font-weight: bold;
+  border-color: var(--earthy-green);
+}
+
+.medieval-mobile-menu-link-accent:hover {
+  background: var(--earthy-green);
+  color: var(--medieval-parchment);
+}
+
+/* Add smooth transitions for body when menu is open */
+body.medieval-menu-open {
+  overflow: hidden;
+}
+
+/* Ensure the mobile nav doesn't interfere with desktop nav */
+@media (min-width: 768px) {
+  .medieval-mobile-nav,
+  .medieval-mobile-menu-overlay {
+    display: none;
   }
 }
