@@ -35,6 +35,23 @@ export const leadershipQuery = groq`
   }
 `
 
+export const boardOfAdvisorsQuery = groq`
+  *[_type == "boardOfAdvisors"] | order(order asc) {
+    _id,
+    name,
+    title,
+    bio,
+    image {
+      asset -> {
+        _id,
+        url
+      },
+      alt
+    },
+    order
+  }
+`
+
 export const projectsQuery = groq`
   *[_type == "project"] | order(startDate desc) {
     _id,

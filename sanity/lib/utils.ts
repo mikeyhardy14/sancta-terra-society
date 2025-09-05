@@ -4,6 +4,7 @@ import {
   aboutPageQuery,
   donatePageQuery,
   leadershipQuery, 
+  boardOfAdvisorsQuery,
   projectsQuery, 
   projectBySlugQuery, 
   siteSettingsQuery,
@@ -24,6 +25,10 @@ export async function getDonatePage() {
 
 export async function getLeadership() {
   return await client.fetch(leadershipQuery)
+}
+
+export async function getBoardOfAdvisors() {
+  return await client.fetch(boardOfAdvisorsQuery)
 }
 
 export async function getProjects() {

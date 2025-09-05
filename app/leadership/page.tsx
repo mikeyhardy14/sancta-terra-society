@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getLeadership } from '../../sanity/lib/utils';
+import { getLeadership, getBoardOfAdvisors } from '../../sanity/lib/utils';
 import Image from 'next/image';
 import imageUrlBuilder from '@sanity/image-url';
 import { client } from '../../sanity/client';
@@ -20,23 +20,28 @@ interface LeadershipMember {
 
 export default function Leadership() {
   const [leadership, setLeadership] = useState<LeadershipMember[]>([]);
+  const [boardOfAdvisors, setBoardOfAdvisors] = useState<LeadershipMember[]>([]);
   const [expandedMember, setExpandedMember] = useState<string | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchLeadership = async () => {
+    const fetchData = async () => {
       try {
-        const data = await getLeadership();
-        setLeadership(data || []);
+        const [leadershipData, advisorsData] = await Promise.all([
+          getLeadership(),
+          getBoardOfAdvisors()
+        ]);
+        setLeadership(leadershipData || []);
+        setBoardOfAdvisors(advisorsData || []);
       } catch (error) {
-        console.error('Error fetching leadership:', error);
+        console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchLeadership();
+    fetchData();
   }, []);
 
   // Handle ESC key to close modal
@@ -86,6 +91,7 @@ export default function Leadership() {
   ];
 
   const leaders = leadership && leadership.length > 0 ? leadership : fallbackLeadership;
+  const advisors = boardOfAdvisors || [];
 
   const openModal = (memberId: string) => {
     setExpandedMember(memberId);
@@ -99,6 +105,62 @@ export default function Leadership() {
       setExpandedMember(null);
     }, 300);
   };
+
+  // Reusable member card component
+  const renderMemberCard = (member: LeadershipMember) => (
+    <div
+      key={member._id}
+      className="w-full max-w-sm medieval-leader-card transition-all duration-300 hover:shadow-lg cursor-pointer"
+      onClick={() => openModal(member._id)}
+    >
+      {/* Profile Image */}
+      <div className="mb-6">
+        <div
+          className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 shadow-lg transition-transform duration-300 hover:scale-105"
+          style={{ borderColor: 'var(--earthy-green)' }}
+        >
+          {member.image ? (
+            <Image
+              src={urlFor(member.image).width(200).height(200).url()}
+              alt={member.name}
+              width={128}
+              height={128}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div
+              className="w-full h-full flex items-center justify-center"
+              style={{ backgroundColor: 'var(--medieval-brown)' }}
+            >
+              <span className="text-4xl" style={{ color: 'var(--medieval-parchment)' }}>
+                ✠
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Name and Title */}
+      <div className="text-center mb-4">
+        <h3
+          className="font-bold text-xl mb-2 transition-colors duration-300 hover:opacity-80"
+          style={{ color: 'var(--earthy-green)' }}
+        >
+          {member.name}
+        </h3>
+        <h4
+          className="font-semibold text-sm uppercase tracking-wide"
+          style={{ color: 'var(--medieval-brown)' }}
+        >
+          {member.title}
+        </h4>
+      </div>
+
+      {/* Click indicator */}
+      <div className="text-center mb-4">
+      </div>
+    </div>
+  );
 
   if (loading) {
     return (
@@ -137,65 +199,30 @@ export default function Leadership() {
             <div className="w-32 h-1 mx-auto mt-4" style={{ backgroundColor: 'var(--earthy-green)' }}></div>
           </div>
 
-          {/* Single column layout with responsive grid */}
-          <div className="max-w-4xl mx-auto">
+          {/* Leadership Section */}
+          <div className="max-w-4xl mx-auto mb-16">
+            <h2 className="text-center text-3xl font-bold mb-8" style={{ color: 'var(--earthy-green)' }}>
+              Leadership
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center">
-              {leaders.map((leader) => (
-                <div
-                  key={leader._id}
-                  className="w-full max-w-sm medieval-leader-card transition-all duration-300 hover:shadow-lg cursor-pointer"
-                  onClick={() => openModal(leader._id)}
-                >
-                  {/* Profile Image */}
-                  <div className="mb-6">
-                    <div
-                      className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 shadow-lg transition-transform duration-300 hover:scale-105"
-                      style={{ borderColor: 'var(--earthy-green)' }}
-                    >
-                      {leader.image ? (
-                        <Image
-                          src={urlFor(leader.image).width(200).height(200).url()}
-                          alt={leader.name}
-                          width={128}
-                          height={128}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <div
-                          className="w-full h-full flex items-center justify-center"
-                          style={{ backgroundColor: 'var(--medieval-brown)' }}
-                        >
-                          <span className="text-4xl" style={{ color: 'var(--medieval-parchment)' }}>
-                            ✠
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Name and Title */}
-                  <div className="text-center mb-4">
-                    <h3
-                      className="font-bold text-xl mb-2 transition-colors duration-300 hover:opacity-80"
-                      style={{ color: 'var(--earthy-green)' }}
-                    >
-                      {leader.name}
-                    </h3>
-                    <h4
-                      className="font-semibold text-sm uppercase tracking-wide"
-                      style={{ color: 'var(--medieval-brown)' }}
-                    >
-                      {leader.title}
-                    </h4>
-                  </div>
-
-                  {/* Click indicator */}
-                  <div className="text-center mb-4">
-                  </div>
-                </div>
-              ))}
+              {leaders.map(renderMemberCard)}
             </div>
           </div>
+
+          {/* Board of Advisors Section - Only show if there are advisors */}
+          {advisors.length > 0 && (
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold mb-4" style={{ color: 'var(--earthy-green)' }}>
+                  Board of Advisors
+                </h2>
+                <div className="w-32 h-1 mx-auto" style={{ backgroundColor: 'var(--earthy-green)' }}></div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center">
+                {advisors.map(renderMemberCard)}
+              </div>
+            </div>
+          )}
 
           {/* Modal Popup */}
           {expandedMember && (
@@ -216,7 +243,8 @@ export default function Leadership() {
                 onClick={(e) => e.stopPropagation()}
               >
                 {(() => {
-                  const selectedLeader = leaders.find((l) => l._id === expandedMember);
+                  const selectedLeader = leaders.find((l) => l._id === expandedMember) || 
+                                       advisors.find((a) => a._id === expandedMember);
                   if (!selectedLeader) return null;
 
                   return (
